@@ -18,8 +18,6 @@ public class Recipe {
     @OneToMany
     private List<Ingredient> simpleIngredients = new ArrayList<>();
     @OneToMany
-    private List<SimpleComplexIngredient> simpleComplexIngredients = new ArrayList<>();
-    @OneToMany
     private List<ComplexIngredient> complexIngredients = new ArrayList<>();
 
     public Recipe() {
@@ -56,15 +54,9 @@ public class Recipe {
         simpleIngredients.add(ingredient);
     }
 
-    public void addSimpleComplexIngredient(SimpleComplexIngredient ingredient) {
-        simpleComplexIngredients.add(ingredient);
-    }
 
     public List<Ingredient> getSimpleIngredients() {
         return simpleIngredients;
     }
 
-    public List<SimpleComplexIngredient> getSimpleComplexIngredients() {
-        return simpleComplexIngredients;
-    }
 }

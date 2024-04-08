@@ -106,14 +106,10 @@ public class Menu {
         System.out.println("Choose recipe name:");
         String name = scanner.nextLine();
         Recipe recipe = new Recipe(name);
-        System.out.println("Pick Pick number of complexIngredients");
+        System.out.println("Pick number of complexIngredients");
         int noOfComplexIngredients = getInput();
         for(int i = 0; i<noOfComplexIngredients; i++)
             recipe.addComplexIngredient(getComplexIngredient());
-        System.out.println("Pick number of simpleComplexIngredients");
-        int noOfSimpleComplexIngredients = getInput();
-        for(int i = 0; i<noOfSimpleComplexIngredients; i++)
-            recipe.addSimpleComplexIngredient(getSimpleComplexIngredient());
         System.out.println("Pick number of ingredients");
         int noOfIngredients = getInput();
         for(int i = 0; i<noOfIngredients; i++)
@@ -125,13 +121,15 @@ public class Menu {
         Set<String> ingredients = new HashSet<>();
         for(Ingredient ingredient: recipe.getSimpleIngredients())
             ingredients.add(ingredient.getName());
-        for(SimpleComplexIngredient simpleComplexIngredient: recipe.getSimpleComplexIngredients())
-            for(Ingredient ingredient: simpleComplexIngredient.getSimpleIngredients())
-                ingredients.add(ingredient.getName());
         for(ComplexIngredient complexIngredient: recipe.getComplexIngredients())
+        {
             for(SimpleComplexIngredient simpleComplexIngredient: complexIngredient.getSimpleComplexIngredients())
                 for(Ingredient ingredient: simpleComplexIngredient.getSimpleIngredients())
                     ingredients.add(ingredient.getName());
+            for(Ingredient ingredient: complexIngredient.getSimpleIngredients())
+                ingredients.add(ingredient.getName());
+        }
+
         return ingredients;
     }
     private void showUniqueIngredients() {
